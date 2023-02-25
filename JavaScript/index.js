@@ -5,6 +5,8 @@ const america = "americas";
 const oceania = "oceania";
 
 function getAPI(region) {
+    const countryContainer = document.getElementById("country-container");
+    countryContainer.innerHTML = "";
     fetch(`https://restcountries.com/v3.1/region/${region}`)
         .then(data => data.json())
         .then(json => processData(json))
@@ -14,7 +16,6 @@ function getAPI(region) {
 const processData = data => {
     const countryContainer = document.getElementById("country-container")
     data.forEach(element => {
-        console.log(element);
         const country = document.createElement("div");
         country.classList.add("fs-6", "card", "col-10", "col-md-6", "col-lg-4", "mx-auto", "custom-card", "p-0")
         const currencies = Object.keys(element.currencies).join(", ");
@@ -29,5 +30,3 @@ const processData = data => {
         countryContainer.appendChild(country);
     });
 }
-
-getAPI(asia);
